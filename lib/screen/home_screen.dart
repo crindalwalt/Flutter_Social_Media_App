@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:new_app/bottomNavbar.dart';
+import 'package:new_app/widgets/bottom_navbar.dart';
+import 'package:new_app/widgets/top_navbar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const homeIcon = Icon(Icons.home);
+    const exploreIcon = Icon(Icons.explore);
+    const notificationIcon = Icon(Icons.notifications);
+    const profileIcon = Icon(Icons.person);
+
+    final labels = ['Home', 'Explore', 'Notifications', 'Profile'];
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Social Media App'),
+      appBar: Material3AppBar(
+        title: 'Social Media App',
+        leading: const Icon(Icons.app_registration), // Example leading widget
+        onChatPressed: () => print('Chat button pressed'),
+        onSearchPressed: () => print('Search button pressed'),
       ),
-      bottomNavigationBar: BottomNavbar(),
+      bottomNavigationBar: Material3BottomNavigationBar(
+        currentIndex: 0, // Initial selected index
+        icons: [homeIcon, exploreIcon, notificationIcon, profileIcon],
+        labels: labels,
+        onItemSelected: (index) {
+          print("$index is selected");
+        }, // Example handler
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
